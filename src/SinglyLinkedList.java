@@ -20,6 +20,43 @@ class Node{
         System.out.print(" Null");
     }
 
+    public static void createNode(int data, Node head){
+//       head - > 1 ->   2 ->  Null
+//       temp -> temp ->temp->
+        Node temp = head;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next = new Node(data,null);
+    }
+
+    public static void insertAtBeg(Node head, int data){
+//          1 -> 2 -> null
+//        head- > newnode | 1 -> 2 -> null
+        Node temp = head.next;
+        Node newnode = new Node(data,null);
+        head.next = newnode;
+        newnode.next = temp;
+
+    }
+
+
+    public static void insertAtAnyPos(Node head, int data, int pos){
+
+        Node temp = head;
+//        Node - > 1- > 3-> 4 -> null
+//        temp - > 1- > 3->500-> 4 -> null
+        int cnt = 0;
+        while (cnt < pos-1){
+            temp=temp.next;
+            cnt++;
+        }
+        Node temp1 = temp.next;
+        Node newnode = new Node (data,null);
+        temp.next = newnode;
+        newnode.next = temp1;
+
+    }
     @Override
     public String toString() {
         return "Node{" +
@@ -57,12 +94,23 @@ public class SinglyLinkedList {
 //
 //        System.out.println(head);
 //        Node.printNode(head);
-        Node head = new Node(100,null);
-        Node n1 = new Node(40,null);
-        head.next=n1;
-        Node.printNode(head);
 
-//        int arr [] = {1,2,4,5,6,7,8,9};
+
+        int arr [] = {1,2,4,5,6,7,8,9};
+        Node head = new Node();
+        for(int i=0;i<arr.length;i++){
+            Node.createNode(arr[i],head);
+
+        }
+        Node.printNode(head.next);
+        System.out.println();
+        System.out.println("After inserting at begining");
+        Node.insertAtBeg(head, 765);
+        Node.printNode(head.next);
+        System.out.println();
+        System.out.println("After inserting at position 3");
+        Node.insertAtAnyPos(head,500,3);
+        Node.printNode(head.next);
 
 
     }
